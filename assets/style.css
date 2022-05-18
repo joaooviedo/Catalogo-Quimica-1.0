@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Exo, sans-serif;
+}
+
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background-color: #ffffff;
+  font-family: sans-serif;
+}
+
+.Home {
+  position: relative;
+  background-image: radial-gradient(
+    farthest-corner at 20px 40px,
+    #289E2F 60%,
+    #52EB5C 100% 
+  );
+  min-height: calc(100vh - 60px);
+  margin: 15px;
+  padding: 15px;
+  border-radius: 20px;
+  color: #000;
+  box-shadow: 0px 0px 15px #0000004d;
+}
+
+.Home > h2 {
+  display: flex;
+  justify-content: space-around;
+  color: #ffffff;
+}
+
+.Home > div {
+  display: flex;
+  justify-content: center;
+  color: #9E184B;
+}
+
+.Home__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 350px) {
+  .Home__container {
+    justify-content: unset;
+  }
+}
+
+.ProdutoLista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px 50px;
+}
+
+@media (max-width: 1220px) {
+  .ProdutoLista {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 840px) {
+  .ProdutoLista {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ProdutoCardItem,
+.ProdutoListaItem {
+  font-family: 'Exo';
+  background: #ffffff4d;
+  border-radius: 10px;
+  padding: 10px;
+  width: 315px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.ProdutoCardItem {
+  margin: 20px 0;
+  height: 150px;
+  width: auto;
+}
+
+@media (max-width: 400px) {
+  .ProdutoCardItem,
+  .ProdutoListaItem {
+    width: 210px;
+    height: 180px;
+  }
+}
+
+.ProdutoCardItem > div,
+.ProdutoListaItem > div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.ProdutoCardItem__sabor,
+.ProdutoListaItem__sabor {
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.ProdutoCardItem__descricao,
+.ProdutoListaItem__descricao {
+  font-size: 0.9em;
+}
+
+.ProdutoCardItem__preco,
+.ProdutoListaItem__preco {
+  color: #EB528D;
+}
+
+.ProdutoListaItem__foto {
+  height: 150px;
+  margin-right: -60px;
+}
