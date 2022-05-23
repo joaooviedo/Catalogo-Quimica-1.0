@@ -35,9 +35,35 @@
                 <button id="idProdutoButton" onclick="achePorIdProdutos()">ESCOLHER</button>
             </div>
             <div id="produtoEscolhido">
-
             </div>
         </div>
+
+        <section class="button-modal-create">
+            <button type="button" class="default-button" onclick="abrirModalCadastro()">Cadastrar Produto</button>
+        </section>
+
+        <section class="modal-overlay" id="overlay">
+
+            <div class="modal">
+
+                <div class="modal-header">
+                    <h2>Cadastrar um produto</h2>
+                    <a onclick="fecharModalCadastro()" class="close-modal">x</a>
+                </div>
+
+                <div class="modal-body">
+                    <div>
+                        <input type="text" name="sabor" id="sabor" placeholder="Nome do Produto">
+                        <input type="number" name="preco" id="preco" placeholder="Preço do Produto">
+                        <textarea type="text" name="descricao" id="descricao" placeholder="Descrição do Produto"
+                            rows="5"></textarea>
+                        <input type="text" name="foto" id="foto" placeholder="Link da Foto do Produto">
+                        <button onclick="criarProduto()">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <h2>Produtos Disponíveis:</h2>
         <div class="Home__container">
             <div class="ProdutoLista" id="produtoList">

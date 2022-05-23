@@ -11,14 +11,12 @@ async function acheTodosProdutos() {
       `<div class="ProdutoListaItem">
         <div>
             <div class="ProdutoListaItem__sabor">${produto.sabor}</div>
-            <div class="ProdutoListaItem__preco">R$ ${produto.preco.toFixed(
-              2,
-            )}</div>
+            <div class="ProdutoListaItem__preco">R$ ${produto.preco}</div>
             <div class="ProdutoListaItem__descricao">${produto.descricao}</div>
           </div>
             <img class="ProdutoListaItem__foto" src=${
               produto.foto
-            } alt=${`Paleta de ${produto.sabor}`} />
+            } alt=${`Nome Produto ${produto.sabor}`} />
         </div>`,
     );
   });
@@ -44,6 +42,60 @@ async function achePorIdProdutos() {
       } alt=${`Paleta de ${produto.sabor}`} />
   </div>`;
 }
-
 acheTodosProdutos();
-achePorIdProdutos();
+
+
+async function criarProduto() {
+  const sabor = document.querySelector('#sabor').value;
+  const preco = document.querySelector('#preco').value;
+  const descricao = document.querySelector('#descricao').value;
+  const foto = document.querySelector('#foto').value;
+
+  const produto = {
+    sabor,
+    preco,
+    descricao,
+    foto,
+  };
+  const response = await fetch(`${baseUrl}/criar-produto`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'cors',
+    body: JSON.stringify(produto),
+  });
+
+  const novoProduto = await response.json();
+
+  const html = `<div class="ProdutoListaItem">
+  <div>
+    <div class="ProdutoListaItem__sabor">${novoProduto.sabor}</div>
+    <div class="ProdutoListaItem__preco">R$ ${novoProduto.preco}</div>
+    <div class="ProdutoListaItem__descricao">${novoProduto.descricao}</div>
+  </div>
+    <img class="ProdutoListaItem__foto" src=${
+      novoProduto.foto
+    } alt=${`Nome do Produto ${novoProduto.sabor}`} />
+  </div>`;
+
+  document.getElementById('produtoList').insertAdjacentHTML('beforeend', html);
+
+  fecharModalCadastro();
+}
+
+async function atualizarProduto() {}
+
+async function deletarProduto() {}
+
+function abrirModalCadastro() {
+  document.querySelector('.modal-overlay').style.display = 'flex';
+}
+
+function fecharModalCadastro() {
+  document.querySelector('.modal-overlay').style.display = 'none';
+  document.querySelector('#sabor').value = '';
+  document.querySelector('#preco').value = 0;
+  document.querySelector('#descricao').value = '';
+  document.querySelector('#foto').value = '';
+}
