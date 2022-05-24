@@ -39,7 +39,7 @@
         </div>
 
         <section class="button-modal-create">
-            <button type="button" class="default-button" onclick="abrirModalCadastro()">Cadastrar Produto</button>
+            <button type="button" class="default-button" onclick="abrirModal()">Cadastrar Produto</button>
         </section>
 
         <section class="modal-overlay" id="overlay">
@@ -47,18 +47,34 @@
             <div class="modal">
 
                 <div class="modal-header">
-                    <h2>Cadastrar um produto</h2>
-                    <a onclick="fecharModalCadastro()" class="close-modal">x</a>
+                    <h2 id="title_header_modal">Cadastrar um produto</h2>
+                    <a onclick="fecharModal()" class="close-modal">x</a>
                 </div>
 
                 <div class="modal-body">
                     <div>
+                        <input type="hidden" id="id">
                         <input type="text" name="sabor" id="sabor" placeholder="Nome do Produto">
                         <input type="number" name="preco" id="preco" placeholder="Preço do Produto">
                         <textarea type="text" name="descricao" id="descricao" placeholder="Descrição do Produto"
                             rows="5"></textarea>
                         <input type="text" name="foto" id="foto" placeholder="Link da Foto do Produto">
-                        <button onclick="criarProduto()">Cadastrar</button>
+                        <button id="button-form-modal" onclick="criarProduto()">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="modal-overlay" id="overlay-delete">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 id="title-header-modal">Confirmação de deleção</h2>
+                    <a onclick="fecharModalDelete()" class="close-modal">x</a>
+                </div>
+                <div class="modal-body-delete">
+                    <p>Deseja realmente apagar esse produto?</p>
+                    <div class="btns_delete">
+                        <button class="btn_delete_no btn_delete" onclick="fecharModalDelete()">Não</button>
+                        <button class="btn_delete_yes btn_delete" onclick="deletarProduto()">Sim</button>
                     </div>
                 </div>
             </div>
