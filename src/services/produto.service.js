@@ -1,27 +1,27 @@
 const produtos = [
   {
     id: 1,
-    sabor: 'Açaí com Leite Condensado',
+    sabor: 'Ácido Sulfúrico',
     descricao:
       'Quam vulputate dignissim suspendisse in est ante in nibh mauris.',
-    foto: './assets/images/acai-com-leite-condensado.png',
-    preco: 10.0,
+    foto: './assets/images/acido-sulfurico.png',
+    preco: 30.00,
   },
   {
     id: 2,
-    sabor: 'Banana com Nutella',
+    sabor: 'Nitrato de Prata',
     descricao:
       'Quam vulputate dignissim suspendisse in est ante in nibh mauris.',
-    foto: './assets/images/banana-com-nutella.png',
-    preco: 10.0,
+    foto: './assets/images/nitrato-de-prata.jpg',
+    preco: 35.0,
   },
   {
     id: 3,
-    sabor: 'Chocolate Belga',
+    sabor: 'Persulfato de Amônio',
     descricao:
       'Quam vulputate dignissim suspendisse in est ante in nibh mauris.',
-    foto: './assets/images/chocolate-belga.png',
-    preco: 7.0,
+    foto: './assets/images/persulfato-de-amonio.png',
+    preco: 45.0,
   },
 ];
 
