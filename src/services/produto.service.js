@@ -15,22 +15,19 @@ const achePorIdService = async (parametroId) => {
 
 //Criar
 const criarProdutoService = async (novoProduto) => {
-  const paletaCriada = await Produto.create(novoProduto)
+  const paletaCriada = await Produto.create(novoProduto);
   return paletaCriada;
 };
 
 //Atualizar
-const atualizarProdutService = (id, ediçaoProduto) => {
-  ediçaoProduto['id'] = id;
-  const produtoIndex = produtos.findIndex((produto) => produto.id == id);
-  produtos[produtoIndex] = ediçaoProduto;
-  return ediçaoProduto;
+const atualizarProdutService = async (id, ediçaoProduto) => {
+  const produtoAtualizado = await Produto.findByIdAndUpdate(id, ediçaoProduto);
+  return produtoAtualizado;
 };
 
 //Deletar
-const deletarProdutoService = (id) => {
-  const produtoIndex = produtos.findIndex((produto) => produto.id == id);
-  return produtos.splice(produtoIndex, 1);
+const deletarProdutoService = async (id) => {
+  return await Produto.findByIdAndDelete(id);
 };
 
 module.exports = {

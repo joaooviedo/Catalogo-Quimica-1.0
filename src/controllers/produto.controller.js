@@ -14,7 +14,7 @@ const acheTodosProdutosController = async (req, res) => {
 
 //Achar por ID
 const achePorIdController = async (req, res) => {
-  const parametroId = (req.params.id);
+  const parametroId = req.params.id;
   if (!mongooose.Types.ObjectId.isValid(parametroId)) {
     return res.status(400).send({ message: 'Id inválido!' });
   }
@@ -35,39 +35,37 @@ const criarProdutoController = async (req, res) => {
     !produto.foto ||
     !produto.formula
   ) {
-    res
-      .status(400)
-      .send({
-        mensagem:
-          'Você não preencheu todos os dados para adicionar um novo produto ao catálogo!',
-      });
+    res.status(400).send({
+      mensagem:
+        'Você não preencheu todos os dados para adicionar um novo produto ao catálogo!',
+    });
   }
   const novoProduto = await produtosService.criarProdutoService(produto);
   res.status(201).send(novoProduto);
 };
 
 //Atualizar
-const atualizarProdutoController = (req, res) => {
-  const parametroId = +req.params.id;
-  const ediçaoProduto = req.body;
-  if (!parametroId) {
+const atualizarProdutoController = async (req, res) => {
+  const parametroId = req.params.id;
+
+  if (!mongooose.Types.ObjectId.isValid(parametroId)) {
     return res.status(404).send({ message: 'Paleta não encontrada!' });
   }
 
+  const ediçaoProduto = req.body;
+
   if (
     !ediçaoProduto ||
-    !ediçaoProduto.sabor ||
+    !ediçaoProduto.nome ||
     !ediçaoProduto.descricao ||
     !ediçaoProduto.foto ||
-    !ediçaoProduto.preco
+    !ediçaoProduto.formula
   ) {
-    return res
-      .status(400)
-      .send({
-        message: 'Você não preencheu todos os dados para editar o produto!',
-      });
+    return res.status(400).send({
+      message: 'Você não preencheu todos os dados para editar o produto!',
+    });
   }
-  const atualizaçaoProduto = produtosService.atualizarProdutService(
+  const atualizaçaoProduto = await produtosService.atualizarProdutService(
     parametroId,
     ediçaoProduto,
   );
@@ -75,12 +73,12 @@ const atualizarProdutoController = (req, res) => {
 };
 
 //Deletar
-const deletarProdutoController = (req, res) => {
-  const parametroId = Number(req.params.id);
-  if (!parametroId) {
+const deletarProdutoController = async (req, res) => {
+  const parametroId = (req.params.id);
+  if (!mongooose.Types.ObjectId.isValid(parametroId)) {
     return res.status(400).send({ message: 'ID inválido!' });
   }
-  produtosService.deletarProdutoService(parametroId);
+  await produtosService.deletarProdutoService(parametroId);
   res.send({ message: 'Produto deletado com sucesso!' });
 };
 
