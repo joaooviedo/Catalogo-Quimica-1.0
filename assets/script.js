@@ -10,7 +10,7 @@ async function acheTodosProdutos() {
       'beforeend',
       `<div class="ProdutoListaItem" id="ProdutoListaItem_${produto.id}">
         <div>
-            <div class="ProdutoListaItem__sabor">${produto.sabor}</div>
+            <div class="ProdutoListaItem__nome">${produto.nome}</div>
             <div class="ProdutoListaItem__preco">R$ ${produto.preco}</div>
             <div class="ProdutoListaItem__descricao">${produto.descricao}</div>
             <div class="ProdutoListaItem__acoes Acoes">
@@ -24,7 +24,7 @@ async function acheTodosProdutos() {
           </div>
             <img class="ProdutoListaItem__foto" src=${
               produto.foto
-            } alt=${`Nome do produto ${produto.sabor}`} />
+            } alt=${`Nome do produto ${produto.nome}`} />
         </div>`,
     );
   });
@@ -41,27 +41,27 @@ async function achePorIdProdutos() {
   produtoEscolhidoDiv.innerHTML = `
   <div class="ProdutoCardItem" id="ProdutoListaItem_${produto.id}>
   <div>
-      <div class="ProdutoCardItem__sabor">${produto.sabor}</div>
+      <div class="ProdutoCardItem__nome"> ${produto.nome} </div>
       <div class="ProdutoCardItem__preco">R$ ${produto.preco.toFixed(2)}</div>
       <div class="ProdutoCardItem__descricao">${produto.descricao}</div>
     </div>
       <img class="ProdutoCardItem__foto" src=${
         produto.foto
-      } alt=${`Paleta de ${produto.sabor}`} />
+      } alt="${`Produto de ${produto.nome}`}" />
   </div>`;
 }
 acheTodosProdutos();
 
 async function criarProduto() {
   const id = document.querySelector('#id').value;
-  const sabor = document.querySelector('#sabor').value;
+  const nome = document.querySelector('#nome').value;
   const preco = document.querySelector('#preco').value;
   const descricao = document.querySelector('#descricao').value;
   const foto = document.querySelector('#foto').value;
 
   const produto = {
     id,
-    sabor,
+    nome,
     preco,
     descricao,
     foto,
@@ -83,7 +83,7 @@ async function criarProduto() {
 
   const html = `<div class="ProdutoListaItem" id="ProdutoListaItem_${produto.id}>
   <div>
-    <div class="ProdutoListaItem__sabor">${novoProduto.sabor}</div>
+    <div class="ProdutoListaItem__nome">${novoProduto.nome}</div>
     <div class="ProdutoListaItem__preco">R$ ${novoProduto.preco}</div>
     <div class="ProdutoListaItem__descricao">${novoProduto.descricao}</div>
     <button class="Acoes__editar btn" onclick="abrirModal(${
@@ -95,7 +95,7 @@ async function criarProduto() {
   </div>
     <img class="ProdutoListaItem__foto" src=${
       novoProduto.foto
-    } alt=${`Nome do Produto ${novoProduto.sabor}`} />
+    } alt=${`Nome do Produto ${novoProduto.nome}`} />
   </div>`;
 
   if (modoEdicaoAtivado) {
@@ -118,7 +118,7 @@ async function abrirModal(id = null) {
     const response = await fetch(`${baseUrl}/produto/${id}`);
     const produto = await response.json();
 
-    document.querySelector('#sabor').value = produto.sabor;
+    document.querySelector('#nome').value = produto.nome;
     document.querySelector('#preco').value = produto.preco;
     document.querySelector('#descricao').value = produto.descricao;
     document.querySelector('#foto').value = produto.foto;
@@ -133,7 +133,7 @@ async function abrirModal(id = null) {
 
 function fecharModal() {
   document.querySelector('.modal-overlay').style.display = 'none';
-  document.querySelector('#sabor').value = '';
+  document.querySelector('#nome').value = '';
   document.querySelector('#preco').value = 0;
   document.querySelector('#descricao').value = '';
   document.querySelector('#foto').value = '';

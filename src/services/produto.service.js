@@ -1,38 +1,19 @@
-const produtos = [
-  {
-    id: 1,
-    sabor: 'Ácido Sulfúrico',
-    descricao:
-      'Quam vulputate dignissim suspendisse in est ante in nibh mauris.',
-    foto: './assets/images/acido-sulfurico.png',
-    preco: 30.00,
-  },
-  {
-    id: 2,
-    sabor: 'Nitrato de Prata',
-    descricao:
-      'Quam vulputate dignissim suspendisse in est ante in nibh mauris.',
-    foto: './assets/images/nitrato-de-prata.jpg',
-    preco: 35.0,
-  },
-  {
-    id: 3,
-    sabor: 'Persulfato de Amônio',
-    descricao:
-      'Quam vulputate dignissim suspendisse in est ante in nibh mauris.',
-    foto: './assets/images/persulfato-de-amonio.png',
-    preco: 45.0,
-  },
-];
+const Produto = require('../models/Produto');
+const mongooose = require('mongoose');
 
-const acheTodosProdutosService = () => {
+//Achar todos
+const acheTodosProdutosService = async () => {
+  const produtos = await Produto.find();
   return produtos;
 };
 
-const achePorIdService = (parametroId) => {
-  return produtos.find((produto) => produto.id === parametroId);
+//Achar por ID
+const achePorIdService = async (parametroId) => {
+  const produto = await Produto.findById(parametroId);
+  return produto;
 };
 
+//Criar
 const criarProdutoService = (novoProduto) => {
   const novoId = produtos.length + 1;
   novoProduto.id = novoId;
@@ -40,18 +21,19 @@ const criarProdutoService = (novoProduto) => {
   return novoProduto;
 };
 
+//Atualizar
 const atualizarProdutService = (id, ediçaoProduto) => {
-    ediçaoProduto['id'] = id;
-    const produtoIndex = produtos.findIndex((produto) => produto.id == id);
-    produtos[produtoIndex] = ediçaoProduto;
-    return ediçaoProduto;
-}
+  ediçaoProduto['id'] = id;
+  const produtoIndex = produtos.findIndex((produto) => produto.id == id);
+  produtos[produtoIndex] = ediçaoProduto;
+  return ediçaoProduto;
+};
 
+//Deletar
 const deletarProdutoService = (id) => {
-    const produtoIndex = produtos.findIndex((produto) => produto.id == id);
-    return produtos.splice(produtoIndex, 1);
-  
-}
+  const produtoIndex = produtos.findIndex((produto) => produto.id == id);
+  return produtos.splice(produtoIndex, 1);
+};
 
 module.exports = {
   acheTodosProdutosService,

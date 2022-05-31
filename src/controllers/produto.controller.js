@@ -1,8 +1,9 @@
 const produtosService = require('../services/produto.service');
+const mongooose = require('mongoose');
 
 //Achar todos
-const acheTodosProdutosController = (req, res) => {
-  const produtos = produtosService.acheTodosProdutosService();
+const acheTodosProdutosController = async (req, res) => {
+  const produtos = await produtosService.acheTodosProdutosService();
   if (produtos.length == 0) {
     return res
       .status(404)
@@ -12,12 +13,12 @@ const acheTodosProdutosController = (req, res) => {
 };
 
 //Achar por ID
-const achePorIdController = (req, res) => {
-  const parametroId = Number(req.params.id);
-  if (!parametroId) {
+const achePorIdController = async (req, res) => {
+  const parametroId = (req.params.id);
+  if (!mongooose.Types.ObjectId.isValid(parametroId)) {
     return res.status(400).send({ message: 'Id inválido!' });
   }
-  const escolhaProduto = produtosService.achePorIdService(parametroId);
+  const escolhaProduto = await produtosService.achePorIdService(parametroId);
   if (!escolhaProduto) {
     return res.status(404).send({ message: 'Produto não encontrado!' });
   }
