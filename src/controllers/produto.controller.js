@@ -15,9 +15,6 @@ const acheTodosProdutosController = async (req, res) => {
 //Achar por ID
 const achePorIdController = async (req, res) => {
   const parametroId = req.params.id;
-  if (!mongooose.Types.ObjectId.isValid(parametroId)) {
-    return res.status(400).send({ message: 'Id inválido!' });
-  }
   const escolhaProduto = await produtosService.achePorIdService(parametroId);
   if (!escolhaProduto) {
     return res.status(404).send({ message: 'Produto não encontrado!' });
@@ -28,18 +25,6 @@ const achePorIdController = async (req, res) => {
 //Criar
 const criarProdutoController = async (req, res) => {
   const produto = req.body;
-  if (
-    !produto ||
-    !produto.nome ||
-    !produto.descricao ||
-    !produto.foto ||
-    !produto.formula
-  ) {
-    res.status(400).send({
-      mensagem:
-        'Você não preencheu todos os dados para adicionar um novo produto ao catálogo!',
-    });
-  }
   const novoProduto = await produtosService.criarProdutoService(produto);
   res.status(201).send(novoProduto);
 };
@@ -47,24 +32,7 @@ const criarProdutoController = async (req, res) => {
 //Atualizar
 const atualizarProdutoController = async (req, res) => {
   const parametroId = req.params.id;
-
-  if (!mongooose.Types.ObjectId.isValid(parametroId)) {
-    return res.status(404).send({ message: 'Paleta não encontrada!' });
-  }
-
   const ediçaoProduto = req.body;
-
-  if (
-    !ediçaoProduto ||
-    !ediçaoProduto.nome ||
-    !ediçaoProduto.descricao ||
-    !ediçaoProduto.foto ||
-    !ediçaoProduto.formula
-  ) {
-    return res.status(400).send({
-      message: 'Você não preencheu todos os dados para editar o produto!',
-    });
-  }
   const atualizaçaoProduto = await produtosService.atualizarProdutService(
     parametroId,
     ediçaoProduto,
@@ -74,10 +42,7 @@ const atualizarProdutoController = async (req, res) => {
 
 //Deletar
 const deletarProdutoController = async (req, res) => {
-  const parametroId = (req.params.id);
-  if (!mongooose.Types.ObjectId.isValid(parametroId)) {
-    return res.status(400).send({ message: 'ID inválido!' });
-  }
+  const parametroId = req.params.id;
   await produtosService.deletarProdutoService(parametroId);
   res.send({ message: 'Produto deletado com sucesso!' });
 };

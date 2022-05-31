@@ -3,18 +3,18 @@
     "nome": "Etanol",
     "descricao": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
     "foto": "./assets/images/acido-sulfurico.png",
-    "preco": "C2H5OH"
+    "formula": "C2H5OH"
   },
   {
     "nome": "Trinitrotolueno",
     "descricao": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
     "foto": "./assets/images/nitrato-de-prata.jpg",
-    "preco": "C7H5N3O6"
+    "formula": "C7H5N3O6"
   },
   {
     "nome": "Benzeno",
     "descricao": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
     "foto": "./assets/images/persulfato-de-amonio.png",
-    "preco": "C6H6"
+    "formula": "C6H6"
   }
 ]
