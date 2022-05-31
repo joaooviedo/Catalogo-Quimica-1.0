@@ -26,14 +26,14 @@ const achePorIdController = async (req, res) => {
 };
 
 //Criar
-const criarProdutoController = (req, res) => {
+const criarProdutoController = async (req, res) => {
   const produto = req.body;
   if (
     !produto ||
-    !produto.sabor ||
+    !produto.nome ||
     !produto.descricao ||
     !produto.foto ||
-    !produto.preco
+    !produto.formula
   ) {
     res
       .status(400)
@@ -42,7 +42,7 @@ const criarProdutoController = (req, res) => {
           'Você não preencheu todos os dados para adicionar um novo produto ao catálogo!',
       });
   }
-  const novoProduto = produtosService.criarProdutoService(produto);
+  const novoProduto = await produtosService.criarProdutoService(produto);
   res.status(201).send(novoProduto);
 };
 

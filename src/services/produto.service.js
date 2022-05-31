@@ -14,11 +14,9 @@ const achePorIdService = async (parametroId) => {
 };
 
 //Criar
-const criarProdutoService = (novoProduto) => {
-  const novoId = produtos.length + 1;
-  novoProduto.id = novoId;
-  produtos.push(novoProduto);
-  return novoProduto;
+const criarProdutoService = async (novoProduto) => {
+  const paletaCriada = await Produto.create(novoProduto)
+  return paletaCriada;
 };
 
 //Atualizar
