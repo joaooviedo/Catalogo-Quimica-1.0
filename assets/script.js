@@ -8,18 +8,18 @@ async function acheTodosProdutos() {
   produtos.forEach((produto) => {
     document.querySelector('#produtoList').insertAdjacentHTML(
       'beforeend',
-      `<div class="ProdutoListaItem" id="ProdutoListaItem_${produto.id}">
+      `<div class="ProdutoListaItem" id="ProdutoListaItem_'${produto._id}'">
         <div>
             <div class="ProdutoListaItem__nome">${produto.nome}</div>
-            <div class="ProdutoListaItem__preco">R$ ${produto.preco}</div>
+            <div class="ProdutoListaItem__formula"> ${produto.formula}</div>
             <div class="ProdutoListaItem__descricao">${produto.descricao}</div>
             <div class="ProdutoListaItem__acoes Acoes">
-            <button class="Acoes__editar btn" onclick="abrirModal(${
-              produto.id
-            })" >Editar</button>
-            <button class="Acoes__apagar btn" onclick="abrirModalDelete(${
-              produto.id
-            })">Apagar</button>
+            <button class="Acoes__editar btn" onclick="abrirModal('${
+              produto._id
+            }')" >Editar</button>
+            <button class="Acoes__apagar btn" onclick="abrirModalDelete('${
+              produto._id
+            }')">Apagar</button>
            </div>
           </div>
             <img class="ProdutoListaItem__foto" src=${
@@ -29,7 +29,7 @@ async function acheTodosProdutos() {
     );
   });
 }
-
+acheTodosProdutos();
 async function achePorIdProdutos() {
   const id = document.querySelector('#idProduto').value;
 
@@ -39,35 +39,30 @@ async function achePorIdProdutos() {
   const produtoEscolhidoDiv = document.querySelector('#produtoEscolhido');
 
   produtoEscolhidoDiv.innerHTML = `
-  <div class="ProdutoCardItem" id="ProdutoListaItem_${produto.id}>
-  <div>
+  <div class="ProdutoCardItem" id="ProdutoListaItem_'${produto._id}'>
       <div class="ProdutoCardItem__nome"> ${produto.nome} </div>
-      <div class="ProdutoCardItem__preco">R$ ${produto.preco.toFixed(2)}</div>
+      <div class="ProdutoCardItem__formula"> ${produto.formula}</div>
       <div class="ProdutoCardItem__descricao">${produto.descricao}</div>
-    </div>
-      <img class="ProdutoCardItem__foto" src=${
-        produto.foto
-      } alt="${`Produto de ${produto.nome}`}" />
+      <img class="ProdutoCardItem__foto" src=${produto.foto} alt="${`Produto de ${produto.nome}`}" />
   </div>`;
 }
-acheTodosProdutos();
 
-async function criarProduto() {
+async function enviandoProduto() {
   const id = document.querySelector('#id').value;
   const nome = document.querySelector('#nome').value;
-  const preco = document.querySelector('#preco').value;
+  const formula = document.querySelector('#formula').value;
   const descricao = document.querySelector('#descricao').value;
   const foto = document.querySelector('#foto').value;
 
   const produto = {
     id,
     nome,
-    preco,
+    formula,
     descricao,
     foto,
   };
 
-  const modoEdicaoAtivado = id > 0;
+  const modoEdicaoAtivado = id != "";
   const endpoint = baseUrl + (modoEdicaoAtivado ? `/atualizar-produto/${id}` : `/criar-produto`);
 
   const response = await fetch(endpoint, {
@@ -81,30 +76,16 @@ async function criarProduto() {
 
   const novoProduto = await response.json();
 
-  const html = `<div class="ProdutoListaItem" id="ProdutoListaItem_${produto.id}>
-  <div>
-    <div class="ProdutoListaItem__nome">${novoProduto.nome}</div>
-    <div class="ProdutoListaItem__preco">R$ ${novoProduto.preco}</div>
-    <div class="ProdutoListaItem__descricao">${novoProduto.descricao}</div>
-    <button class="Acoes__editar btn" onclick="abrirModal(${
-      produto.id
-    })" >Editar</button>
-    <button class="Acoes__apagar btn" onclick="abrirModalDelete(${
-      produto.id
-    })">Apagar</button>
-  </div>
-    <img class="ProdutoListaItem__foto" src=${
-      novoProduto.foto
-    } alt=${`Nome do Produto ${novoProduto.nome}`} />
-  </div>`;
+  document.location.reload(true)
 
-  if (modoEdicaoAtivado) {
-    document.querySelector(`#ProdutoListaItem_${id}`).outerHTML = html;
-  } else {
-    document
-      .getElementById('produtoList')
-      .insertAdjacentHTML('beforeend', html);
-  }
+
+  // if (modoEdicaoAtivado) {
+  //   document.querySelector(`#ProdutoListaItem_${id}`).outerHTML = html;
+  // } else {
+  //   document
+  //     .getElementById('produtoList')
+  //     .insertAdjacentHTML('beforeend', html);
+  // }
 
   fecharModal();
 }
@@ -119,10 +100,10 @@ async function abrirModal(id = null) {
     const produto = await response.json();
 
     document.querySelector('#nome').value = produto.nome;
-    document.querySelector('#preco').value = produto.preco;
+    document.querySelector('#formula').value = produto.formula;
     document.querySelector('#descricao').value = produto.descricao;
     document.querySelector('#foto').value = produto.foto;
-    document.querySelector('#id').value = produto.id;
+    document.querySelector('#id').value = produto._id;
   } else {
     document.querySelector('#title_header_modal').innerText =
       'Cadastrar um produto';
@@ -134,7 +115,7 @@ async function abrirModal(id = null) {
 function fecharModal() {
   document.querySelector('.modal-overlay').style.display = 'none';
   document.querySelector('#nome').value = '';
-  document.querySelector('#preco').value = 0;
+  document.querySelector('#formula').value = 0;
   document.querySelector('#descricao').value = '';
   document.querySelector('#foto').value = '';
 }
@@ -161,7 +142,6 @@ const deletarProduto = async (id) => {
     mode: "cors",
   });
   const result = await response.json();
-  alert(result.message)
-  document.getElementById("produtoList").innerHTML = ""
-  acheTodosProdutos()
+  document.location.reload(true)
+  fecharModalDelete()
 };

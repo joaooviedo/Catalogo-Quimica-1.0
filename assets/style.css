@@ -118,8 +118,8 @@ html {
   font-size: 0.9em;
 }
 
-.ProdutoCardItem__preco,
-.ProdutoListaItem__preco {
+.ProdutoCardItem__formula,
+.ProdutoListaItem__formula {
   color: #eb528d;
 }
 
@@ -432,4 +432,21 @@ textarea {
 .btn_delete_yes:hover{
   background-color: #00b309;
   color: #fff;
+}
+.default-button {
+  background-color: transparent;
+  border: 2px solid #9e184b;
+  padding: 0.4rem;
+  color: #9e184b;
+  font-weight: 600;
+  border-radius: 0.2rem;
+  width: 330px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+}
+.default-button:hover {
+  background-color: #9e184b;
+  color: #ffffff;
 }

@@ -28,19 +28,20 @@
             </div>
         </div>
 
+        <section class="button-modal-create">
+            <button type="button" class="default-button" onclick="abrirModal()">Cadastrar Produto</button>
+        </section>
+
         <h2>Pesquisar Um Produto</h2>
         <div class="produto-escolhido-espaco">
             <div id="produto-escolhido-input-espaco">
-                <input type="number" id="idProduto" placeholder="Digite o ID do produto e clique em 'Escolher'" />
+                <input type="text" id="idProduto" placeholder="Digite o ID do produto e clique em 'Escolher'" />
                 <button id="idProdutoButton" onclick="achePorIdProdutos()">ESCOLHER</button>
             </div>
             <div id="produtoEscolhido">
             </div>
         </div>
 
-        <section class="button-modal-create">
-            <button type="button" class="default-button" onclick="abrirModal()">Cadastrar Produto</button>
-        </section>
 
         <section class="modal-overlay" id="overlay">
 
@@ -55,11 +56,11 @@
                     <div>
                         <input type="hidden" id="id">
                         <input type="text" name="nome" id="nome" placeholder="Nome do Produto">
-                        <input type="number" name="preco" id="preco" placeholder="Preço do Produto">
+                        <input type="text" name="formula" id="formula" placeholder="formula do Produto">
                         <textarea type="text" name="descricao" id="descricao" placeholder="Descrição do Produto"
                             rows="5"></textarea>
                         <input type="text" name="foto" id="foto" placeholder="Link da Foto do Produto">
-                        <button id="button-form-modal" onclick="criarProduto()">Cadastrar</button>
+                        <button id="button-form-modal" onclick="enviandoProduto()">Cadastrar</button>
                     </div>
                 </div>
             </div>
